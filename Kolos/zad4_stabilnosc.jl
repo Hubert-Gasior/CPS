@@ -29,23 +29,26 @@ function rozwiazanie(;
     #p::Vector{ComplexF64} = ComplexF64[0.6404855033133797 - 0.545423471093966im, 0.6404855033133797 + 0.545423471093966im, 0.511107806149499 - 0.31862383206623646im, 0.511107806149499 + 0.31862383206623646im, 0.4577258015009146 - 0.1044437279304051im, 0.4577258015009146 + 0.1044437279304051im],
     #k::Float64 = 0.23787967525154624,
 )
-    P = length(p)
-    mod = zeros(P)
-    x = 0
+    
+    
+    ## dla z, p, k
+    #P = length(p)
+    #mod = zeros(P)
+    #x = 0
 
-    for i in 1:P
-        mod[i] = abs(p[i])
-    end
+    #for i in 1:P
+    #    mod[i] = abs(p[i])
+    #end
 
-    sort!(mod)
+    #sort!(mod)
 
-    if mod[P] < 1
-        x = 1.0
-    elseif mod[P] == 1.0
-        x = 0.0
-    else
-        x = -1.0
-    end
+    #if mod[P] < 1
+    #    x = 1.0
+    #elseif mod[P] == 1.0
+    #    x = 0.0
+    #else
+    #    x = -1.0
+    #end
     return x
 end
 

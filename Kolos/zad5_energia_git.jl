@@ -11,21 +11,25 @@ function rozwiazanie(;
     #t1::Float64 = -6.97,
     #N::Int = 860,
 
-    #wynik 10084.199999999997 , g(t) c(0, 1/2), y(t) = 4.9*g(2.4*t -2.9) bipolarna fala prostokatna, obliczyc enregie
-    #fp::Float64 = 118.8,
-    #t1::Float64 = -3.76,
-    #N::Int = 420,
+    #wynik 10084.199999999997 , git 10084.199999999997 g(t) c(0, 1/2), y(t) = 4.9*g(2.4*t -2.9) bipolarna fala prostokatna, obliczyc enregie
+    fp::Float64 = 118.8,
+    t1::Float64 = -3.76,
+    N::Int = 420,
 
     ##wynik: 1046.577596197517 git 1046.5775961975173
-    fp::Float64 = 338.65,
-    t1::Float64 = -0.76,
-    N::Int = 130,
+    #fp::Float64 = 338.65,
+    #t1::Float64 = -0.76,
+    #N::Int = 130,
 )
-    g = t -> -2 * rem(t, 1, RoundNearest)
+    g = t -> -2 * rem(t, 1, RoundNearest) #piła o opadjacym zboczu git
+    #g = t -> ifelse(mod(t, 1) < 0.5, 1, -1) #bipolarny trojkat git
     t = range(; start=t1, step=(1 / fp), length=N)
-    y = 3.4 * g.(0.8 .* t .- 3.1)
-    energy = sum(abs2, y)
-    return energy
+    #y = 3.4 * g.(0.8 .* t .- 3.1)
+    #y = 4.9*g.(2.4 .*t .-2.9)
+    y = 3.6*g.(2.6.*t .- 1.0)
+    #energy = sum(abs2, y)
+    mean = sum(y)/length(y)
+    return mean
 end
 
 println(rozwiazanie())
