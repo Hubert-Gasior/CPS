@@ -25,13 +25,13 @@ function rozwiazanie(;
     #f2::Float64 = 80.77,
     #z::Vector{Int} = [36, 5, 27, 23, 74, 75],
 
-    #wynik 0.1327799158448321, filtr dolnoprzepustowy rzedu 56, okno hamminga 
+    #wynik 0.1327799158448321, filtr dolnoprzepustowy rzedu 56, okno hamminga.
     order::Int = 56,
     fp::Float64 = 101.0,
     f0::Float64 = 9.09,
     z::Vector{Int} = [47, 27, 18, 9],
 )
-  
+
 end
 
 rozwiazanie()
