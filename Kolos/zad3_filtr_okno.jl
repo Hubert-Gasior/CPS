@@ -25,12 +25,11 @@ function rozwiazanie(;
     #f2::Float64 = 80.77,
     #z::Vector{Int} = [36, 5, 27, 23, 74, 75],
 
-    ## Prawidłwe rozwiązanie tego problemu to -0.03809121223861556
-    order::Int = 62,
-    fp::Float64 = 113.0,
-    f1::Float64 = 15.82,
-    f2::Float64 = 18.08,
-    z::Vector{Int} = [35, 14, 25],
+    #wynik 0.1327799158448321, filtr dolnoprzepustowy rzedu 56, okno hamminga 
+    order::Int = 56,
+    fp::Float64 = 101.0,
+    f0::Float64 = 9.09,
+    z::Vector{Int} = [47, 27, 18, 9],
 )
   
 end

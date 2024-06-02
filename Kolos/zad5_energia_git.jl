@@ -5,6 +5,15 @@
 
 function rozwiazanie(;
 
+    #wynik -0.04714155615918824, dg/dt = 4 fala trojkatna y(t) = 3.5*g(4.7*t-4.9)
+    #fp::Float64 = 325.49,
+    #t1::Float64 = 9.7,
+    #N::Int = 919
+
+    #wynik 1.6091548952441304, dg/dt = 2 pila o narastajacym zboczu y(t) = 2.2*g(1.2*t-2.9)
+    #fp::Float64 = 167.74,
+    #t1::Float64 = 2.14,
+    #N::Int = 998,
 
     ## wynik 0.011251045424347012, dg/dt = -2, pila o poadajcym zboczu y(t) = 3.6*g(2.6*t - 1.0) obliczyc srednia sygnału
     #fp::Float64 = 156.14,
@@ -22,7 +31,7 @@ function rozwiazanie(;
     #N::Int = 130,
 )
     g = t -> -2 * rem(t, 1, RoundNearest) #piła o opadjacym zboczu git
-    #g = t -> ifelse(mod(t, 1) < 0.5, 1, -1) #bipolarny trojkat git
+    #g = t -> ifelse(mod(t, 1) < 0.5, 1, -1) #bipolarny prostokat git
     t = range(; start=t1, step=(1 / fp), length=N)
     #y = 3.4 * g.(0.8 .* t .- 3.1)
     #y = 4.9*g.(2.4 .*t .-2.9)
