@@ -5,10 +5,10 @@
 
 function rozwiazanie(;
 
-    #wynik -0.04714155615918824, dg/dt = 4 fala trojkatna y(t) = 3.5*g(4.7*t-4.9)
-    #fp::Float64 = 325.49,
-    #t1::Float64 = 9.7,
-    #N::Int = 919
+    #wynik -0.04714155615918824, dg/dt = 4 fala trojkatna y(t) = 3.5*g(4.7*t-4.9) git -0.0471415561591897
+    fp::Float64 = 325.49,
+    t1::Float64 = 9.7,
+    N::Int = 919
 
     #wynik 1.6091548952441304, dg/dt = 2 pila o narastajacym zboczu y(t) = 2.2*g(1.2*t-2.9)
     #fp::Float64 = 167.74,
@@ -21,22 +21,24 @@ function rozwiazanie(;
     #N::Int = 860,
 
     #wynik 10084.199999999997 , git 10084.199999999997 g(t) c(0, 1/2), y(t) = 4.9*g(2.4*t -2.9) bipolarna fala prostokatna, obliczyc enregie
-    fp::Float64 = 118.8,
-    t1::Float64 = -3.76,
-    N::Int = 420,
+    #fp::Float64 = 118.8,
+    #t1::Float64 = -3.76,
+    #N::Int = 420,
 
     ##wynik: 1046.577596197517 git 1046.5775961975173.
     #fp::Float64 = 338.65,
     #t1::Float64 = -0.76,
     #N::Int = 130,
 )
-    g = t -> -2 * rem(t, 1, RoundNearest) #piła o opadjacym zboczu git
+    #g = t -> -2 * rem(t, 1, RoundNearest) #piła o opadjacym zboczu git
     #g = t -> ifelse(mod(t, 1) < 0.5, 1, -1) #bipolarny prostokat git
+    g = t -> 4*abs(t-floor(t+3/4)+1/4)-1
     t = range(; start=t1, step=(1 / fp), length=N)
     #y = 3.4 * g.(0.8 .* t .- 3.1)
     #y = 4.9*g.(2.4 .*t .-2.9)
-    y = 3.6*g.(2.6.*t .- 1.0)
-    #energy = sum(abs2, y)
+    #y = 3.6*g.(2.6.*t .- 1.0)
+    y = 3.5*g.(4.7 .* t .- 4.9)
+    energy = sum(abs2, y)
     mean = sum(y)/length(y)
     return mean
 end

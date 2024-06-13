@@ -16,25 +16,22 @@ author = Dict{Symbol, String}(
 # SygnaĹy ciÄgĹe
 ##
 cw_rectangular(t::Real; T=1.0)::Real = t % T <= 0.5 ? 1 : 0
-println(cw_rectangular(52.4))
 ##
 
 ##
 cw_triangle(t::Real, T=1.0)::Real = t % T <= 0.5 ? t % T : 1 - (t % T)
-println(cw_triangle(2.2))
 ##
 
-##!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+##
 function cw_literka_M(t::Real, T = 1.0)
     fig = Figure()
     ax = Axis(fig[1, 1])
     lines!(ax, [Point(t, 0), Point(t,1), Point(t + T/2, 0.5), Point(t + T, 1), Point(t + T, 0)])
     fig
 end
-cw_literka_M(2)
 ##
 
-##!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+##
 function cw_literka_U(t::Real; T = 1.0)
     x = -T/2 : 0.0001 : T/2
     fun = 8*x.^2
@@ -44,41 +41,30 @@ function cw_literka_U(t::Real; T = 1.0)
     lines!(ax, shift, fun)
     fig
 end
-cw_literka_U(2)
 ##
 
 ##
 ramp_wave(t::Real; T = 1.0)::Real = t % T 
-println(ramp_wave(1.1))
 ##
 
 ##
 sawtooth_wave(t::Real; T = 1.0)::Real= 1 -(t % T)
-println(sawtooth_wave(0.4))
 ##
 
 ##
 triangular_wave(t::Real, T = 1.0)::Real = t % T <= 0.5 ? 2*(t % T) : 2 - 2*(t % T)
-println(triangular_wave(1.4))
 ##
 
 ##
 square_wave(t::Real; T = 1.0)::Real = t % T <= 0.5 ? 1 : -1
-println(square_wave(1.51))
 ##
 
 ##
 pulse_wave(t::Real; p = 0.2, T = 1.0)::Real = t % T <= p ? 1 : 0
-println(pulse_wave(1.2))
 ##
 
-##     COS POLICZYLO ALE CO ??????????????????????????
+##
 impulse_reapeter(g::Function, t1::Real, t2::Real)::Function = f(t::Real) = g(t - ((t - t1) % (t2 - t1)))
-g(t) = sin(t)
-t1 = 5.0
-t2 = 10.0
-f = impulse_reapeter(g, t1, t2)
-println(f(3.0))
 ##
 
 ##
@@ -97,7 +83,6 @@ function ramp_wave_b1(t; A=1.0, T=1.0, band=20.0)
 end
 return y
 end
-println(ramp_wave_b1(2.2))
 ##
 
 ##
@@ -116,7 +101,6 @@ function sawtooth_wave_b1(t; A=1.0, T=1.0, band=20.0)
     end
     return y
 end
-println(sawtooth_wave_b1(2.3))
 ##
 
 ##
@@ -130,7 +114,6 @@ function triangular_wave_b1(t; A=1.0, T=1.0, band=20.0)
     end
     return y + 0.5
 end
-println(triangular_wave_b1(2.3))
 ##
 
 ##
@@ -149,7 +132,6 @@ function square_wave_b1(t; A=1.0, T=1.0, band=20.0)
 end
 return y
 end
-println(square_wave_b1(2.2))
 ##
 
 ##
@@ -170,78 +152,57 @@ end
 ##
 
 # SygnaĹy dyskretne
-## IDK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+##
 kronecker(n::Integer)::Real = n == 0 ? 1 : 0
-println(kronecker(2))
 ##
 
 ##
 heaviside(n::Integer)::Real = n < 0 ? 0 : 1
-println(heaviside(-3)) 
 ##
 
 # Okna
 ##
 rect(N::Integer)::AbstractVector{<:Real} = N <= 0 ? println("N must be greater than 0") : samples = ones(N)
-println(rect(4))
 ##
 
 ##
 triang(N::Int) = N <= 0 ? println("N must be greater than 0") : (N == 1 ? [1.0] : [(i <= div(N, 2) ? i / (div(N, 2) + 1) : (N - i + 1) / (div(N, 2) + 1)) for i in 1:N])
-println(triang(101))
 ##
 
 ##
 hanning(N::Integer)::AbstractVector{<:Real} = N <= 0 ? println("N must be greater than 0") : ( N == 1 ? [1.0] : [0.5*(1-cos((2*π*i)/(N-1))) for i in 0 : N-1])
-println(hanning(5))
 ##
 
 ##
 hamming(N::Integer)::AbstractVector{<:Real} =  N <= 0 ? println("N must be greater than 0") : (N == 1 ? [1.0] : [0.53836 - 0.46164*cos((2*π*i)/(N-1)) for i in 0 : N-1])
-println(hamming(4))
 ##
 
 ##
 blackman(N::Integer)::AbstractVector{<:Real} = N <= 0 ? println("N must be greater than 0") : (N == 1 ? [1.0] :  [0.42-(0.5*cos((2*π*i)/(N-1)))+(0.08*cos((4*π*i)/(N-1))) for i in 0 : N-1])
-println(blackman(11))
 ##
 
 # Parametry sygnaĹĂłw
 ##
 mean(x::AbstractVector)::Number = sum(x)/length(x)
-x = [1.0 + 2.0im, 3.0 + 4.0im]
-println(mean(x))
 ##
 
 ##
 peak2peak(x::AbstractVector)::Real = abs(maximum(x))+abs(minimum(x))
-x = [1, -2, 3, 5, -1 , 0]
-println(peak2peak(x))
 ##
 
 ##
 energy(x::AbstractVector)::Real = sum((abs2.(x)))
-#x = [2+3.0im, 4+2.0im, 3-2.0im] 
-#x = [3+2.0im, 5+5.0im, 7+7.0im] 
-x= [3+2.0im, 7+4.0im]
-println(energy(x))
 ##
 
 ##
 power(x::AbstractVector)::Real = (1/length(x))*sum(abs2.(x))
-#x = [2+3.0im, 4+2.0im, 3-2.0im] 
-#x = [3+2.0im, 5+5.0im, 7+7.0im] 
-#x= [3+2.0im, 7+4.0im]
-println(power(x))
 ##
 
 ##
 rms(x::AbstractVector)::Real = √((1/length(x))*sum(abs2.(x)))
-x = [1 + 3.0im, 2 - 2.0im, 5 + 7.0im]
-println(rms(x))
 ##
 
-## CZY ma liczyc tylko pelne wycinki??????????????
+##
 function running_mean(x::AbstractVector, M::Integer)::Vector
     l = length(x)÷(2*M+1)
     check = length(x)%(2*M+1)
@@ -281,8 +242,6 @@ function running_mean(x::AbstractVector, M::Integer)::Vector
     end
     return mean
 end
-x = [2+3.0im, 4+2.0im, 3-2.0im, 3+2.0im, 5+5.0im, 7+7.0im, 3+2.0im, 7+4.0im]
-println(running_mean(x, 2))
 ##
 
 ##
@@ -320,8 +279,6 @@ function running_energy(x::AbstractVector, M::Integer)::Vector
     end
     return energy
 end
-x = [2+3.0im, 4+2.0im, 3-2.0im, 3+2.0im, 5+5.0im, 7+7.0im, 3+2.0im, 7+4.0im]
-println(running_energy(x, 1))
 ##
 
 ##
@@ -364,8 +321,6 @@ function running_power(x::AbstractVector, M::Integer)::Vector
     end
     return power
 end
-x = [2+3.0im, 4+2.0im, 3-2.0im, 3+2.0im, 5+5.0im, 7+7.0im, 3+2.0im, 7+4.0im]
-println(running_power(x, 1))
 ##
 
 # PrĂłbkowanie
@@ -375,6 +330,14 @@ function interpolate(
     s::AbstractVector,
     kernel::Function=sinc
 )::Real
+    return x -> begin
+        sum = 0.0
+        Δt = m[2] - m[1]
+        for i in eachindex(m)
+            sum += s[i] * kernel((x - m[i]) / Δt)
+        end
+        return sum
+    end
 end
 ##
 
@@ -383,18 +346,14 @@ end
 function quantize(x::Real, L::AbstractVector{<:Real})::Real
     return L[argmin(abs.(x .- L))]
 end
-L = [1, 2, 5, 7, 9, 12]
-println(quantize(8.1, L))
 ##
 
 ##
 SQNR(N::Integer)::Real = N*6.02 + 1.76
-println(SQNR(3))
 ##
 
 ##
 SNR(Psignal, Pnoise)::Real = (10*log10(Psignal/Pnoise))
-println(SNR(100,10))
 ##
 
 # Obliczanie DFT
@@ -406,8 +365,6 @@ function dtft(f::Real, signal::AbstractVector{Complex{T}}, fs::Real) where T<:Re
     end
     return DTFT
 end
-x = [1.0+1.0im, 2.0+0.0im, 0.0+1.0im, 1.0+0.0im]
-println(dtft(5, x, 10))
 ##
 
 ##
@@ -424,8 +381,6 @@ function dft(x::AbstractVector)::Vector
 
     return dft
 end
-x = [1, 4, 2, -3]
-println(dft(x))
 ##
 
 ##
@@ -441,9 +396,6 @@ function idft(X::AbstractVector)::Vector
 
     return idft
 end
-
-x = [-1.0-4.0im, 1.0+3.6e-16im, 1-4im, 7.0+3.1e-14im]
-println(idft(x))
 ##
 
 ##
@@ -458,9 +410,6 @@ function rdft(x::AbstractVector)::Vector
 
     return rdft
 end
-
-x = [1,2,3,4]
-println(rdft(x))
 ##
 
 ##
@@ -477,8 +426,6 @@ function irdft(X::AbstractVector, N::Integer)::Vector
 
     return irdft
 end
-x = [4.0-0.0im, -7.34e-16+4.0im, -4.0-1.46e-15im]
-println(irdft(x, 3))
 ##
 
 ##
@@ -496,9 +443,6 @@ function fft_radix2_dit_r(x::AbstractVector)::Vector
 
     return X
 end
-
-x = [1, 3, 5, 6, 3]
-println(fft_radix2_dit_r(x))
 ##
 
 ##
@@ -516,8 +460,6 @@ function ifft_radix2_dif_r(X::AbstractVector)::Vector
 
     return X
 end
-x =[-3.23606797749979 + 1.1755705045849454im, 1.2360679774997902 - 1.9021130325903068im, 1.236067977499789 + 1.9021130325903073im, -3.236067977499789 - 1.175570504584948im, 4.0 + 2.6942229581241772e-15im]
-println(ifft_radix2_dif_r(x))
 ##
 
 ##
@@ -534,30 +476,22 @@ end
 
 ##
 fftfreq(N::Integer, fs::Real)::Vector = [(k <= N÷2 ? k*(fs/N) : (k-N)*(fs/N)) for k in 0:(N-1)]
-println(fftfreq(9, 10))
 ##
 
 ##
 rfftfreq(N::Integer, fs::Real)::Vector = [k*(fs/N) for k in 0 : (N÷2)]
-println(rfftfreq(8, 100))
 ##
 
 ##
 amplitude_spectrum(x::AbstractVector, w::AbstractVector=rect(length(x)))::Vector = abs.(fft(x.*w))
-x = [1, 2, 4.5, 5]
-println(amplitude_spectrum(x))
 ##
 
 ##
 power_spectrum(x::AbstractVector, w::AbstractVector=rect(length(x)))::Vector = (1/length(x)).*abs2.(fft(x.*w))
-x = [1, 2, 4.5, 5]
-println(power_spectrum(x))
 ##
 
 ##
 psd(x::AbstractVector, w::AbstractVector=rect(length(x)), fs::Real=1.0)::Vector = abs2.(fft(x.*w))/(sum(abs2, w)*fs)
-x = [1, 2, 4.5, 5]
-println(psd(x))
 ##
 
 ##
@@ -583,9 +517,6 @@ function periodogram(
 
     return psd[1:K÷2 + 1]
 end
-
-x = [1, 2, 4, 1, 4, 6]
-println(periodogram(x))
 ##
 
 ##
@@ -615,10 +546,6 @@ function conv(f::Vector, g::Vector)::Vector
     end
     return y
 end
-
-f = [1, 4, 6, 3, 2]
-f2 = [3, 2, 6, 3, 1]
-println(conv(f, f2))
 ##
 
 ##
@@ -639,10 +566,6 @@ function fast_conv(f::Vector, g::Vector)::Vector
 
     return conv_result[1:L]
 end
-
-f = [1, 4, 6, 3, 2]
-f2 = [3, 2, 6, 3, 1]
-println(fast_conv(f,f2))
 ##
 
 ##
@@ -659,61 +582,93 @@ end
 
 ##
 function lti_filter(b::Vector, a::Vector, x::Vector)::Vector
-    missing
+    N = length(x)
+    M = length(b) - 1
+    K = length(a) - 1
+    y = zeros(Float64, N)
+
+    for n in 1:N
+        for k in 0:M
+            if n - k > 0
+                y[n] += b[k+1] * x[n-k]
+            end
+        end
+        for k in 1:K
+            if n - k > 0
+                y[n] -= a[k+1] * y[n-k]
+            end
+        end
+    end
+    return y
 end
 ##
 
 ##
 function filtfilt(b::Vector, a::Vector, x::Vector)::Vector
-    missing
+    y_fwd_filt = lti_filter(b, a, x)
+    y_rvs = reverse(y_fwd_filt)
+    y_rvs_filt = lti_filter(b, a, y_rvs)
+    return reverse(y_rvs_filt)
 end
 ##
 
 ##
 function lti_amp(f::Real, b::Vector, a::Vector)::Real
-    missing
+    M = length(b)
+    K = length(a)
+    num = sum(b[m+1] * cispi(-2 * f * m) for m in 0:M-1)
+    denom = sum(a[k+1] * cispi(-2 * f * k) for k in 0:K-1)
+    H_f = num / denom
+    return abs(H_f)
 end
 ##
 
 ##
 function lti_phase(f::Real, b::Vector, a::Vector)::Real
-    missing
+    M = length(b)
+    K = length(a)
+    num = sum(b[m+1] * cispi(-2 * f * m) for m in 0:M-1)
+    denom = sum(a[k+1] * cispi(-2 * f * k) for k in 0:K-1)
+    H_f = num / denom
+    return angle(H_f)
 end
 ##
 
 ##
 function firwin_lp_I(order, F0)
-    missing
+    return [2F0 * sinc(2F0 * n) for n in -order/2:order/2]
 end
 ##
 
 ##
 function firwin_hp_I(order, F0)
-    missing
+    return [kronecker(Int(n)) - 2F0 * sinc(2F0 * n) for n in -order/2:order/2]
 end
 ##
 
 ##
 function firwin_bp_I(order, F1, F2)
-    missing
+    return [2F2 * sinc(2F2 * n) - 2F1 * sinc(2F1 * n) for n in -order/2:order/2]
 end
 ##
 
 ##
 function firwin_bs_I(order, F1, F2)
-    missing
+    return [kronecker(Int(n)) - (2F2 * sinc(2F2 * n) - 2F1 * sinc(2F1 * n)) for n in -order/2:order/2]
 end
 ##
 
 ##
 function firwin_lp_II(N, F0)
-    missing
+    N = range(start=order / 2, stop=order / 2, length=order)
+    return [2F0 * sinc(2F0 * n) for n in N]
 end
 ##
 
 ##
 function firwin_bp_II(N, F1, F2)
-    missing
+    N = range(start=order / 2, stop=order / 2, length=order)
+    return [2F2 * sinc(2F2 * n) - 2F1 * sinc(2F1 * n) for n in N]
 end
 ##
 
