@@ -69,14 +69,15 @@ function rozwiazanie(;
 
     result = 0.0
     
-    #for j in 1:length(f) # kiedy sa takie same wartosci w F
-        for i in 1:N
-            if F[i] in f #f[j]
-                #result += abs(xdft[i])
-                result += angle(xdft[i]) 
+    for i in 1:length(f)
+        for j in 1:N
+            if  f[i] == F[j]
+                result += abs(xdft[j])
+                result +=angle(xdft[j])
+                println(F[j])
             end
         end
-    #end
+    end
 
     return result
 end
