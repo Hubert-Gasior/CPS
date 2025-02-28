@@ -13,5 +13,8 @@ To repozytorium zawiera kody źródłowe z przedmiotu Cyfrowe Przetwarzanie Sygn
   - Dyskretna Transformata Fouriera (DFT)
   - Równania różnicowe
   - Z-transformata
+  - Odpowiedź impuslowa nierekursywengo systemu
+  - Stabilność systemu
+  - Eneregia sygnału
 
 - **Zbiór Funkcji**: Katalog zawiera implementacje funkcji używanych w DSP, obejmujące różnorodne algorytmy i techniki przetwarzania sygnałów.
