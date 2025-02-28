@@ -1,6 +1,6 @@
 # Repozytorium Cyfrowego Przetwarzania Sygnałów (DSP)
 
-# Autor: Hubert Gąsior
+Autor: Hubert Gąsior
 
 ## Opis
 To repozytorium zawiera kody źródłowe z przedmiotu Cyfrowe Przetwarzanie Sygnałów (DSP). Repozytorium jest podzielone na dwa główne katalogi: jeden zawiera rozwiązania zadań, a drugi zbiór funkcji z tej tematyki.
