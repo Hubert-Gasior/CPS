@@ -2,9 +2,7 @@
 ## Filtr zaprojektuj tak aby przy częstotliwości próbkowania 𝑓𝑝=113.0 Hz, 3 dB pasmo przepustowe zaczynało się na częstotliwość 𝑓0=16.95 Hz.
 ## Do zaprojektowania filtru wykorzystaj metodę okien czasowych i okno Hanninga. Jako rozwiązanie podaj sumę wartości wektora ℎh o indeksach 𝑧=[35,14,25], 
 ## to znaczy,∑𝑖∈𝑧ℎ𝑖.i∈z∑hi.
-##!!!!!!!!!!OKNA STR 213 FILTRY STR 330 !!!!!!!!!!!!!
-##
-function rozwiazanie(;
+function filter(;
     order::Int = 62,
     fp::Float64 = 113.0,
     f0::Float64 = 16.95,
